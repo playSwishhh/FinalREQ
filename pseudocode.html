@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pseudocodes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="algorithms.html">Algorithms</a></li>
+        <li><a href="pseudocode.html" class="active">Pseudocode</a></li>
+        <li><a href="datastructures.html">Data Structures</a></li>
+     </ul>
+</nav>
+
+<div class="section">
+    <h2>Pseudocodes</h2>
+    <pre>
+1. Jump Search
+FUNCTION JumpSearch(array, target, n):
+    step = FLOOR(SQRT(n))
+    prev = 0
+
+    // Step 1: Find the block
+    WHILE array[MIN(step, n) - 1] < target:
+        prev = step
+        step = step + FLOOR(SQRT(n))
+        IF prev >= n:
+            RETURN -1
+    
+    // Step 2: Perform Linear Search in the block
+    WHILE array[prev] < target:
+        prev = prev + 1
+        IF prev == MIN(step, n):
+            RETURN -1
+
+    IF array[prev] == target:
+        RETURN prev
+
+    RETURN -1
+
+2. Interpolation Search
+FUNCTION InterpolationSearch(array, target, low, high):
+    WHILE low <= high AND target >= array[low] AND target <= array[high]:
+        // Core calculation of the probe position
+        pos = low + (((high - low) / (array[high] - array[low])) * (target - array[low]))
+
+        IF array[pos] == target:
+            RETURN pos
+        
+        IF array[pos] < target:
+            low = pos + 1
+        ELSE:
+            high = pos - 1
+
+    IF array[low] == target:
+        RETURN low
+    ELSE:
+        RETURN -1
+
+3. Shell Sort
+FUNCTION ShellSort(array, n):
+    gap = FLOOR(n / 2)
+    
+    WHILE gap > 0:
+        FOR i = gap TO n - 1:
+            temp = array[i]
+            j = i
+
+            // Insertion sort for the current gap size
+            WHILE j >= gap AND array[j - gap] > temp:
+                array[j] = array[j - gap]
+                j = j - gap
+
+            array[j] = temp
+
+        gap = FLOOR(gap / 2)
+
+4. Heapsort
+FUNCTION HeapSort(array, n):
+    // 1. Build Max Heap
+    FOR i = FLOOR(n / 2) - 1 DOWNTO 0:
+        Heapify(array, n, i)
+
+    // 2. Extract elements one by one
+    FOR i = n - 1 DOWNTO 1:
+        SWAP array[0], array[i] // Move current root to end
+        Heapify(array, i, 0) // Rebuild heap on reduced size
+
+FUNCTION Heapify(array, n, i):
+    largest = i
+    left = 2 * i + 1 
+    right = 2 * i + 2 
+
+    IF left < n AND array[left] > array[largest]:
+        largest = left
+
+    IF right < n AND array[right] > array[largest]:
+        largest = right
+
+    IF largest != i:
+        SWAP array[i], array[largest]
+        Heapify(array, n, largest)
+
+
+5. Radix Sort
+FUNCTION RadixSort(array, n):
+    max_val = MAX_ELEMENT(array)
+    exp = 1
+    WHILE FLOOR(max_val / exp) > 0:
+        CountingSort(array, n, exp) // Use stable sort for each digit
+        exp = exp * 10
+
+// Stable sort based on the digit at position 'exp'
+FUNCTION CountingSort(array, n, exp):
+    output[n] 
+    count[10] (initialize to 0)
+
+    FOR i = 0 TO n - 1:
+        index = FLOOR(array[i] / exp)
+        count[index MOD 10] = count[index MOD 10] + 1
+
+    FOR i = 1 TO 9:
+        count[i] = count[i] + count[i - 1]
+
+    FOR i = n - 1 DOWNTO 0:
+        index = FLOOR(array[i] / exp)
+        output[count[index MOD 10] - 1] = array[i]
+        count[index MOD 10] = count[index MOD 10] - 1
+
+    FOR i = 0 TO n - 1:
+        array[i] = output[i]
+
+6. Kruskal's Algorithm (Minimum Spanning Tree)
+FUNCTION Kruskal(graph, V):
+    result[] // List to store MST edges
+    edges = SORT_BY_WEIGHT(graph.edges)
+    CREATE DISJOINT_SET_STRUCTURE(V) // Union-Find
+
+    FOR each edge (u, v) in edges:
+        IF FIND_SET(u) IS NOT FIND_SET(v):
+            ADD edge (u, v) TO result
+            UNION_SETS(u, v)
+    
+    RETURN result
+
+7. Prim's Algorithm (Minimum Spanning Tree)
+FUNCTION Prim(graph, start_node):
+    MST_Set[V] = false // Tracks vertices included in MST
+    key[V] = INFINITY // Key values to pick minimum weight edge
+    key[start_node] = 0 // Start with source node
+    parent[V] = NULL
+
+    FOR count = 0 TO V-1:
+        // Pick the minimum key vertex not yet in MST
+        u = EXTRACT_MIN_KEY_VERTEX(key, MST_Set)
+        MST_Set[u] = true
+
+        // Update key value and parent for adjacent vertices
+        FOR each neighbor v of u:
+            IF v NOT IN MST_Set AND weight(u, v) < key[v]:
+                parent[v] = u
+                key[v] = weight(u, v)
+
+    RETURN parent
+
+8. A* Search Algorithm
+FUNCTION AStar(start, goal):
+    open_set = {start}
+    g_score[start] = 0 // Cost from start to current node
+    f_score[start] = g_score[start] + heuristic(start, goal) // Estimated total cost
+
+    WHILE open_set IS NOT empty:
+        current = node in open_set with lowest f_score
+        IF current == goal:
+            RETURN reconstruct_path(current)
+
+        REMOVE current FROM open_set
+        
+        FOR each neighbor v of current:
+            tentative_g_score = g_score[current] + distance(current, v)
+
+            IF tentative_g_score < g_score[v]:
+                g_score[v] = tentative_g_score
+                f_score[v] = g_score[v] + heuristic(v, goal)
+                IF v NOT IN open_set:
+                    ADD v TO open_set
+    
+    RETURN failure
+
+9. Floyd-Warshall Algorithm (All-Pairs Shortest Path)
+FUNCTION FloydWarshall(W): // W is the adjacency matrix with weights
+    n = number of vertices
+    dist[n][n] = W // Initialize distances
+
+    FOR k = 0 TO n-1: // Intermediate vertices
+        FOR i = 0 TO n-1: // Source vertices
+            FOR j = 0 TO n-1: // Destination vertices
+                // Check if path through k is shorter
+                IF dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    RETURN dist
+
+10. Knapsack Problem (0/1 Dynamic Programming)
+FUNCTION Knapsack_DP(weights[], values[], capacity, n):
+    // K[i][w] stores max value with first i items and capacity w
+    K[n+1][capacity+1]
+
+    FOR i = 0 TO n:
+        FOR w = 0 TO capacity:
+            IF i == 0 OR w == 0:
+                K[i][w] = 0 // Base case: no items or no capacity
+            ELSE IF weights[i-1] <= w:
+                // Option 1: Include item i-1
+                value_with = values[i-1] + K[i-1][w - weights[i-1]]
+                // Option 2: Exclude item i-1
+                value_without = K[i-1][w] 
+                
+                K[i][w] = MAX(value_with, value_without)
+            ELSE:
+                // Item is too heavy, must exclude
+                K[i][w] = K[i-1][w]
+    
+    RETURN K[n][capacity]
+
+    </pre>
+</div>
+
+<footer>
+    <div>For CC104 Final Requirement</div>
+</footer>
+
+</body>
+</html>
