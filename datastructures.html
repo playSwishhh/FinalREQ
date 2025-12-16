@@ -28,10 +28,21 @@
     our_bday.remove(11)
     print(len(our_bday))
 
-    OUTPUT:
-    10
-    10
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('arrayOut','10\n10')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('arrayOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="arrayOut" class="output"></pre>
 
     <h3>2. Stack – Infix, Postfix, Prefix</h3>
     <h4>Infix to Postfix</h4>
@@ -62,15 +73,25 @@
         
         return ' '.join(postfix)
 
-
     expr = "A + B - C * D / E"
     postfix_expr = infix_to_postfix(expr)
     print(postfix_expr)
 
-    OUTPUT:
-    A B + C D * E / -
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('postfixOut','A B + C D * E / -')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('postfixOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="postfixOut" class="output"></pre>
 
     <h4>Postfix Evaluation</h4>
     <pre>
@@ -91,10 +112,21 @@
     result = eval_postfix(postfix_expr)
     print(result)
 
-    OUTPUT:
-    A + B - C * E / D
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('evalPostfixOut','A + B - C * E / D')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('evalPostfixOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="evalPostfixOut" class="output"></pre>
 
     <h4>Prefix Evaluation</h4>
     <pre>
@@ -116,10 +148,21 @@
     result = eval_prefix(prefix_expr)
     print(result)
 
-    OUTPUT:
-    A + B - C * E / D
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('evalPrefixOut','A + B - C * E / D')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('evalPrefixOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="evalPrefixOut" class="output"></pre>
 
     <h3>3. Queue</h3>
     <pre>
@@ -150,18 +193,21 @@
 
     print("\nCurrent participants:", list(call))
 
-    OUTPUT:
-    Rhayven is on the call.
-    Dale is on the call.
-    Jerven is on the call.
-
-    Current participants: ['Rhayven', 'Dale', 'Jerven']
-    Rhayven has left the call.
-    Dale has left the call.
-
-    Current participants: ['Jerven']
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('queueOut',`Rhayven is on the call. \nDale is on the call. \nJerven is on the call. \n \nCurrent participants: ['Rhayven', 'Dale', 'Jerven'] \nRhayven has left the call. \nDale has left the call. \n\nCurrent participants: ['Jerven']`)">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('queueOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="queueOut" class="output"></pre>
 
     <h3>4. Trees – Inorder, Preorder, Postorder</h3>
     <h4>Preorder</h4>
@@ -189,11 +235,21 @@
     print("Preorder Traversal:")
     preorder(root)  
 
-    OUTPUT:
-    Preorder Traversal:
-    A B D E C F
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('PreorderOut','Preorder Traversal:\nA B D E C F')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('PreorderOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="PreorderOut" class="output"></pre>
 
     <h4>Inorder</h4>
     <pre>
@@ -222,11 +278,21 @@
     print("Inorder Traversal:")
     inorder(root)  
 
-    OUTPUT: 
-    Inorder Traversal:
-    D B E A C F
-
     </pre>
+
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('InorderOut','Inorder Traversal:\n D B E A C F')">
+            ▶ Run
+        </button>
+
+        <button class="restart-btn"
+            onclick="restartCode('InorderOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="InorderOut" class="output"></pre>
 
     <h4>Postorder</h4>
     <pre>
@@ -253,19 +319,41 @@
     print("Postorder Traversal:")
     postorder(root)  
 
-    OUTPUT:
-    Postorder Traversal:
-    D E B F C A
-
     </pre>
     
+    <div class="btn-group">
+        <button class="run-btn"
+            onclick="runCode('PostorderOut','Postorder Traversal:\n D E B F C A')">
+            ▶ Run
+        </button>
 
+        <button class="restart-btn"
+            onclick="restartCode('PostorderOut')">
+            ⟳ Restart
+        </button>
+    </div>
+
+    <pre id="PostorderOut" class="output"></pre>
 
 </div>
 
 <footer>
     <div class="req">For CC104 Final Requirement</div>
 </footer>
+
+    <script>
+        function runCode(outputId, result) {
+            const out = document.getElementById(outputId);
+            out.classList.remove("d-none");
+            out.textContent = result;
+        }
+
+        function restartCode(outputId) {
+            const out = document.getElementById(outputId);
+            out.textContent = "";
+            out.classList.add("d-none");
+        }
+    </script>
 
 </body>
 </html>
