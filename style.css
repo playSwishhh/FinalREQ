@@ -225,24 +225,3 @@ button {
     cursor: pointer;
     transition: 0.2s ease;
 }
-
-
-.run-btn {
-    background-color: #04AA6D;
-    color: white;
-    margin-right: 6px;
-}
-
-.run-btn:hover {
-    background-color: #03985f;
-}
-
-
-.restart-btn {
-    background-color: #f44336;
-    color: white;
-}
-
-.restart-btn:hover {
-    background-color: #d7372c;
-}
