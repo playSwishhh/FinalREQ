@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>Data Structures</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
@@ -19,8 +20,9 @@
 <div class="section">
     <h2>Data Structures</h2>
 
+    
     <h3>1. Array</h3>
-    <pre>
+    <textarea id="arrayCode" class="code-box">
 
     our_bday = [7, 11, 13, 19, 22, 29, 8, 9, 28, 10]
     our_bday.append(1)
@@ -28,144 +30,110 @@
     our_bday.remove(11)
     print(len(our_bday))
 
-    </pre>
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('arrayOut','10\n10')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('arrayOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('arrayCode','arrayOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('arrayOut')">⟳ Clear</button>
     </div>
-
     <pre id="arrayOut" class="output"></pre>
 
+    
     <h3>2. Stack – Infix, Postfix, Prefix</h3>
     <h4>Infix to Postfix</h4>
-    <pre>
+    <textarea id="infixCode" class="code-box">
 
     def infix_to_postfix(expression):
         stack = []
         postfix = []
-        
         precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '(': 0, ')': 0}
-        
         for token in expression.split():
-            if token.isalnum():  
+            if token.isalnum():
                 postfix.append(token)
-            elif token == '(':  
+            elif token == '(':
                 stack.append(token)
-            elif token == ')':  
+            elif token == ')':
                 while stack and stack[-1] != '(':
                     postfix.append(stack.pop())
-                stack.pop()  
-            else:  
+                stack.pop()
+            else:
                 while stack and precedence.get(stack[-1], 0) >= precedence[token]:
                     postfix.append(stack.pop())
                 stack.append(token)
-        
         while stack:
             postfix.append(stack.pop())
-        
         return ' '.join(postfix)
 
     expr = "A + B - C * D / E"
     postfix_expr = infix_to_postfix(expr)
     print(postfix_expr)
 
-    </pre>
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('postfixOut','A B + C D * E / -')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('postfixOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('infixCode','infixOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('infixOut')">⟳ Clear</button>
     </div>
+    <pre id="infixOut" class="output"></pre>
 
-    <pre id="postfixOut" class="output"></pre>
 
     <h4>Postfix Evaluation</h4>
-    <pre>
+    <textarea id="postfixEvalCode" class="code-box">
 
     def eval_postfix(expression):
         stack = []
-
         for token in expression.split():
-            if token.isalnum():  
+            if token.isalnum():
                 stack.append(token)
-            else:  # Operator
+            else:
                 b = stack.pop()
                 a = stack.pop()
-                stack.append(f"{a} {token} {b}")  
+                stack.append(f"{a} {token} {b}")
         return stack[0]
 
     postfix_expr = "A B + C E * D / -"
     result = eval_postfix(postfix_expr)
     print(result)
 
-    </pre>
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('evalPostfixOut','A + B - C * E / D')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('evalPostfixOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('postfixEvalCode','postfixOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('postfixOut')">⟳ Clear</button>
     </div>
+    <pre id="postfixOut" class="output"></pre>
 
-    <pre id="evalPostfixOut" class="output"></pre>
 
     <h4>Prefix Evaluation</h4>
-    <pre>
+    <textarea id="prefixEvalCode" class="code-box">
 
     def eval_prefix(expression):
         stack = []
-        tokens = expression.split()[::-1]  
-
+        tokens = expression.split()[::-1]
         for token in tokens:
-            if token.isalnum():  
+            if token.isalnum():
                 stack.append(token)
-            else:  
+            else:
                 a = stack.pop()
                 b = stack.pop()
-                stack.append(f"{a} {token} {b}")  
+                stack.append(f"{a} {token} {b}")
         return stack[0]
 
     prefix_expr = "- + A B / * C E D"
     result = eval_prefix(prefix_expr)
     print(result)
 
-    </pre>
-
+    </textarea>
+    
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('evalPrefixOut','A + B - C * E / D')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('evalPrefixOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('prefixEvalCode','prefixOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('prefixOut')">⟳ Clear</button>
     </div>
+    <pre id="prefixOut" class="output"></pre>
 
-    <pre id="evalPrefixOut" class="output"></pre>
-
+    
     <h3>3. Queue</h3>
-    <pre>
+    <textarea id="queueCode" class="code-box">
 
     from collections import deque
 
@@ -193,25 +161,21 @@
 
     print("\nCurrent participants:", list(call))
 
-    </pre>
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('queueOut',`Rhayven is on the call. \nDale is on the call. \nJerven is on the call. \n \nCurrent participants: ['Rhayven', 'Dale', 'Jerven'] \nRhayven has left the call. \nDale has left the call. \n\nCurrent participants: ['Jerven']`)">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('queueOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('queueCode','queueOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('queueOut')">⟳ Clear</button>
     </div>
-
     <pre id="queueOut" class="output"></pre>
 
+    
+
     <h3>4. Trees – Inorder, Preorder, Postorder</h3>
+
+
     <h4>Preorder</h4>
-    <pre>
+    <textarea id="preorderCode" class="code-box">
 
     class Node:
         def __init__(self, data):
@@ -228,38 +192,29 @@
 
     def preorder(node):
         if node:
-            print(node.data, end=' ')  
-            preorder(node.left)       
-            preorder(node.right)       
+            print(node.data, end=' ')
+            preorder(node.left)
+            preorder(node.right)
 
     print("Preorder Traversal:")
-    preorder(root)  
-
-    </pre>
+    preorder(root)
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('PreorderOut','Preorder Traversal:\nA B D E C F')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('PreorderOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('preorderCode','preorderOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('preorderOut')">⟳ Clear</button>
     </div>
+    <pre id="preorderOut" class="output"></pre>
 
-    <pre id="PreorderOut" class="output"></pre>
 
     <h4>Inorder</h4>
-    <pre>
-        
+    <textarea id="inorderCode" class="code-box">
+
     class Node:
         def __init__(self, data):
             self.data = data
             self.left = None
             self.right = None
-
 
     root = Node('A')
     root.left = Node('B')
@@ -268,35 +223,27 @@
     root.left.right = Node('E')
     root.right.right = Node('F')
 
-
     def inorder(node):
         if node:
-            inorder(node.left)  
+            inorder(node.left)
             print(node.data, end=' ')
-            inorder(node.right)  
+            inorder(node.right)
 
     print("Inorder Traversal:")
-    inorder(root)  
+    inorder(root)
 
-    </pre>
+    </textarea>
 
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('InorderOut','Inorder Traversal:\n D B E A C F')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('InorderOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('inorderCode','inorderOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('inorderOut')">⟳ Clear</button>
     </div>
+    <pre id="inorderOut" class="output"></pre>
 
-    <pre id="InorderOut" class="output"></pre>
 
     <h4>Postorder</h4>
-    <pre>
-        
+    <textarea id="postorderCode" class="code-box">
+
     class Node:
         def __init__(self, data):
             self.data = data
@@ -312,48 +259,87 @@
 
     def postorder(node):
         if node:
-            postorder(node.left)   
-            postorder(node.right)  
-            print(node.data, end=' ')  
+            postorder(node.left)
+            postorder(node.right)
+            print(node.data, end=' ')
 
     print("Postorder Traversal:")
-    postorder(root)  
+    postorder(root)
 
-    </pre>
-    
+    </textarea>
+
     <div class="btn-group">
-        <button class="run-btn"
-            onclick="runCode('PostorderOut','Postorder Traversal:\n D E B F C A')">
-            ▶ Run
-        </button>
-
-        <button class="restart-btn"
-            onclick="restartCode('PostorderOut')">
-            ⟳ Restart
-        </button>
+        <button class="run-btn" onclick="runPython('postorderCode','postorderOut')">▶ Run</button>
+        <button class="restart-btn" onclick="restartCode('postorderOut')">⟳ Clear</button>
     </div>
-
-    <pre id="PostorderOut" class="output"></pre>
+    <pre id="postorderOut" class="output"></pre>
 
 </div>
+
+
 
 <footer>
     <div class="req">For CC104 Final Requirement</div>
 </footer>
 
-    <script>
-        function runCode(outputId, result) {
-            const out = document.getElementById(outputId);
-            out.classList.remove("d-none");
-            out.textContent = result;
-        }
 
-        function restartCode(outputId) {
-            const out = document.getElementById(outputId);
-            out.textContent = "";
-            out.classList.add("d-none");
-        }
-    </script>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<script>
+
+    let pyodideReady = false;
+    let pyodide;
+
+    async function loadPyodideAndPackages() {
+        pyodide = await loadPyodide();
+        pyodideReady = true;
+        console.log("Python is ready!");
+    }
+
+    loadPyodideAndPackages();
+
+    async function runPython(codeId, outputId) {
+    if (!pyodideReady) {
+        alert("Python is still loading, please wait!");
+        return;
+    }
+    const code = document.getElementById(codeId).value;
+    const outputElement = document.getElementById(outputId);
+
+    try {
+        let output = "";
+
+        // Capture all stdout and stderr
+        pyodide.runPython(`
+import sys
+from js import console
+
+class OutputCatcher:
+    def __init__(self):
+        self.data = ""
+    def write(self, s):
+        from js import console
+        self.data += s
+        console.log(s)
+    def flush(self):
+        pass
+
+sys.stdout = OutputCatcher()
+sys.stderr = OutputCatcher()
+        `);
+
+        await pyodide.runPythonAsync(code);
+
+        // Get the captured stdout back
+        output = await pyodide.runPythonAsync("sys.stdout.data");
+        outputElement.textContent = output;
+
+    } catch (err) {
+        outputElement.textContent = "Error:\n" + err;
+    }
+}
+
+</script>
 
 </body>
 </html>
