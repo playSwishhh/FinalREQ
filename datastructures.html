@@ -309,7 +309,7 @@
     try {
         let output = "";
 
-        // Capture all stdout and stderr
+        
         pyodide.runPython(`
 import sys
 from js import console
@@ -329,8 +329,7 @@ sys.stderr = OutputCatcher()
         `);
 
         await pyodide.runPythonAsync(code);
-
-        // Get the captured stdout back
+        
         output = await pyodide.runPythonAsync("sys.stdout.data");
         outputElement.textContent = output;
 
@@ -339,7 +338,12 @@ sys.stderr = OutputCatcher()
     }
 }
 
+    function restartCode(outputId) {
+        const outputElement = document.getElementById(outputId);
+        outputElement.textContent = ""; 
+    }
 </script>
 
 </body>
 </html>
+
