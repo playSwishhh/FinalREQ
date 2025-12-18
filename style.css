@@ -246,3 +246,27 @@ button {
 .restart-btn:hover {
     background-color: #d7372c;
 }
+
+.code-box {
+    width: 100%;
+    min-height: 180px;
+    font-family: monospace;
+    font-size: 14px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    background: #0d0d0d;
+    color: #00ff95;
+    resize: vertical;
+    margin-top: 10px;
+}
+.output {
+    background: #1a1a1a;
+    color: #00ff95;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    margin-top: 10px;
+    min-height: 50px;
+    white-space: pre-wrap;
+}
